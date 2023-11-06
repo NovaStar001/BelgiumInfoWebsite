@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Dino Game</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f7f7f7;
+        }
+
+        #game-container {
+            position: relative;
+            width: 400px;
+            height: 200px;
+            background-color: #f7f7f7;
+            border: 1px solid #ccc;
+        }
+
+        #dino {
+            position: absolute;
+            bottom: 0;
+            left: 50px;
+            width: 40px;
+            height: 40px;
+            background-color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div id="game-container">
+        <div id="dino"></div>
+    </div>
+    <script>
+        const dino = document.getElementById("dino");
+        let isJumping = false;
+
+        document.addEventListener("keydown", function (event) {
+            if (event.code === "Space" && !isJumping) {
+                jump();
+            }
+        });
+
+        function jump() {
+            isJumping = true;
+            let position = 0;
+
+            const jumpInterval = setInterval(function () {
+                if (position === 100) {
+                    clearInterval(jumpInterval);
+                    const fallInterval = setInterval(function () {
+                        if (position === 0) {
+                            clearInterval(fallInterval);
+                            isJumping = false;
+                        } else {
+                            position -= 10;
+                            dino.style.bottom = position + "px";
+                        }
+                    }, 20);
+                } else {
+                    position += 10;
+                    dino.style.bottom = position + "px";
+                }
+            }, 20);
+        }
+    </script>
+</body>
+</html>
