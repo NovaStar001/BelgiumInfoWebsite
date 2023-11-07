@@ -33,7 +33,7 @@ function getRandomInt(min, max) {
 }
   
 function generateSequence() {
-  const sequence = ['I', 'J', 'L', 'O', 'S', 'T', 'Z', 'U', 'O', 'V', 'Q', 'R'];
+  const sequence = ['I', 'J', 'L', 'O', 'S', 'T', 'Z', 'U', 'O', 'V', 'Q', 'R', 'Y'];
 
   while (sequence.length) {
     const rand = getRandomInt(0, sequence.length - 1);
@@ -212,6 +212,11 @@ const tetrominos = {
     [0,0,0],
     [1,0,0],
     [1,1,0],
+  ],
+  'Y': [
+    [1,0,1],
+    [1,1,1],
+    [0,1,0],
   ]
 };
 
@@ -227,7 +232,8 @@ const colors = {
   'O': 'magenta',
   'V': 'maroon',
   'Q': 'gray',
-  'R': 'white'
+  'R': 'white',
+  'Y': 'red',
 };
 
 let count = 0;
