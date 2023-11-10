@@ -248,7 +248,7 @@ function loop() {
 document.addEventListener('keydown', function(e) {
   if (gameOver) return;
 
-  if (e.which === 37 || e.which === 39) {
+  if (e.which === 37 || e.which === 39 || e.which === 64 || e.which === 67) {
     const col = e.which === 37
       ? tetromino.col - 1
       : tetromino.col + 1;
@@ -258,14 +258,14 @@ document.addEventListener('keydown', function(e) {
     }
   }
   
-  if (e.which === 38) {
+  if (e.which === 38 || e.which === 87) {
     const matrix = rotate(tetromino.matrix);
     if (isValidMove(matrix, tetromino.row, tetromino.col)) {
       tetromino.matrix = matrix;
     }
   }
 
-  if(e.which === 40) {
+  if(e.which === 40 || e.which === 83) {
     const row = tetromino.row + 1;
 
     if (!isValidMove(tetromino.matrix, row, tetromino.col)) {
