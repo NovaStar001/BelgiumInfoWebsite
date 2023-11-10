@@ -248,7 +248,7 @@ function loop() {
 document.addEventListener('keydown', function(e) {
   if (gameOver) return;
 
-  if (e.which === 37 || e.which === 39 || e.which === 64 || e.which === 67) {
+  if (e.which === 37 || e.which === 39) {
     const col = e.which === 37
       ? tetromino.col - 1
       : tetromino.col + 1;
