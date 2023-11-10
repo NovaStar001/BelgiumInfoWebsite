@@ -258,14 +258,14 @@ document.addEventListener('keydown', function(e) {
     }
   }
   
-  if (e.which === 38 || e.which === 87) {
+  if (e.which === 38) {
     const matrix = rotate(tetromino.matrix);
     if (isValidMove(matrix, tetromino.row, tetromino.col)) {
       tetromino.matrix = matrix;
     }
   }
 
-  if(e.which === 40 || e.which === 83) {
+  if(e.which === 40) {
     const row = tetromino.row + 1;
 
     if (!isValidMove(tetromino.matrix, row, tetromino.col)) {
