@@ -15,6 +15,15 @@
   width: 50px;
   height: 50px;
   border: 1px solid #ccc;
+  background-size: cover;
+}
+
+.tower-cell {
+  background-image: url('tower.jpg'); /* Replace 'tower_sprite.png' with your tower image */
+}
+
+.enemy-cell {
+  background-image: url('Zombo.png'); /* Replace 'enemy_sprite.png' with your enemy image */
 }
 
 #info-panel {
