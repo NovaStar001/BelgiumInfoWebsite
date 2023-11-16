@@ -1,8 +1,6 @@
 let money = 100;
 let selectedCell;
 
-// ... (Previous code remains unchanged)
-
 function buildTower() {
   if (selectedCell && selectedCell.classList.contains('empty-cell') && money >= 50) {
     money -= 50;
@@ -32,8 +30,6 @@ function spawnEnemy() {
     moveEnemy(randomCell);
   }
 }
-
-// ... (Previous code remains unchanged)
 
 function moveEnemy(enemyCell) {
   const gridCells = document.querySelectorAll('.cell');
@@ -77,10 +73,11 @@ document.addEventListener('DOMContentLoaded', () => {
 
   for (let i = 0; i < 50; i++) {
     const cell = document.createElement('div');
-    cell.classList.add('cell');
-    cell.addEventListener('click', () => {
-      alert('Clicked on cell ' + i);
     cell.classList.add('cell', 'empty-cell');
+    cell.addEventListener('click', () => {
+      // Set the selected cell when clicked
+      selectedCell = cell;
+    });
     gridContainer.appendChild(cell);
   }
 
