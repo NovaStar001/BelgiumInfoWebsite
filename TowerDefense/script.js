@@ -32,7 +32,6 @@ function buildTower() {
 
     selectedCell.classList.remove('empty-cell');
     selectedCell.classList.add('tower-cell');
-    selectedCell = null;
   } else if (!selectedCell) {
     alert('Select a cell to place the tower.');
   } else if (!selectedCell.classList.contains('empty-cell')) {
