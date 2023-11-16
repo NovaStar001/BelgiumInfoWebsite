@@ -1,8 +1,8 @@
 class Tower {
   constructor(cell, attackPower, attackSpeed, range) {
     this.cell = cell;
-    this.attackPower = attackPower;
-    this.attackSpeed = attackSpeed;
+    this.attackPower = 10;
+    this.attackSpeed = 1000;
     this.range = range;
   }
 
