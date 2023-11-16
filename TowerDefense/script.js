@@ -11,7 +11,7 @@ class Tower {
     if (enemy.health <= 0) {
       enemy.cell.classList.remove('enemy-cell');
       enemy.cell.classList.add('empty-cell');
-      // Handle enemy destruction, e.g., award money
+      money += 100;
     }
   }
 }
