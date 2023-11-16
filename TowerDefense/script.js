@@ -77,6 +77,9 @@ document.addEventListener('DOMContentLoaded', () => {
 
   for (let i = 0; i < 50; i++) {
     const cell = document.createElement('div');
+    cell.classList.add('cell');
+    cell.addEventListener('click', () => {
+      alert('Clicked on cell ' + i);
     cell.classList.add('cell', 'empty-cell');
     gridContainer.appendChild(cell);
   }
