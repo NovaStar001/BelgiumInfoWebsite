@@ -3,20 +3,22 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Display Stored Value</title>
+  <title>Display Stored Values</title>
 </head>
 <body>
   <div class="display-container">
-    <p class="display-value" id="displayValue"></p>
+    <ul id="displayList" class="display-list"></ul>
   </div>
 
   <script>
-    var storedValue = localStorage.getItem('storedValue');
-    if (storedValue) {
-      document.getElementById('displayValue').textContent = 'Stored Value: ' + storedValue;
-    } else {
-      document.getElementById('displayValue').textContent = 'No value stored.';
-    }
+    var submittedValues = JSON.parse(localStorage.getItem('submittedValues')) || [];
+    var displayList = document.getElementById('displayList');
+
+    submittedValues.forEach(function(value) {
+      var listItem = document.createElement('li');
+      listItem.textContent = value;
+      displayList.appendChild(listItem);
+    });
   </script>
 </body>
 </html>
