@@ -5,51 +5,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Vote Submission</title>
   <style>
-    body {
-      font-family: Arial, sans-serif;
-      background-color: #f5f5f5;
-      margin: 0;
-      padding: 0;
-    }
-
-    .container {
-      max-width: 600px;
-      margin: 50px auto;
-      background-color: #fff;
-      padding: 20px;
-      border-radius: 5px;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-    }
-
-    h1 {
-      text-align: center;
-      color: #333;
-    }
-
-    form {
-      margin-bottom: 20px;
-    }
-
-    p {
-      margin-bottom: 10px;
-    }
-
-    input[type="radio"] {
-      margin-right: 10px;
-    }
-
-    .submit-btn {
-      background-color: #4CAF50;
-      color: white;
-      padding: 10px 20px;
-      border: none;
-      border-radius: 3px;
-      cursor: pointer;
-    }
-
-    .submit-btn:hover {
-      background-color: #45a049;
-    }
+    /* Your CSS styles go here */
   </style>
 </head>
 <body>
@@ -77,7 +33,6 @@
       <p>Vote for your favorite (Category 4):</p>
       <input type="radio" name="vote4" value="Option 1"> Option 1<br>
       <input type="radio" name="vote4" value="Option 2"> Option 2<br>
-      <br>
       <button type="button" onclick="submitVotes()" class="submit-btn">Submit</button>
     </form>
   </div>
@@ -87,6 +42,13 @@
     var submissionNumber2 = JSON.parse(localStorage.getItem('submissionNumber2')) || 1;
     var submissionNumber3 = JSON.parse(localStorage.getItem('submissionNumber3')) || 1;
     var submissionNumber4 = JSON.parse(localStorage.getItem('submissionNumber4')) || 1;
+
+    // Check if user is locked
+    var isLocked = sessionStorage.getItem('isLocked') === 'true';
+
+    if (isLocked) {
+      disableForms(); // Disable voting forms if user is locked
+    }
 
     function submitVotes() {
       var voteForm1 = document.getElementById('form1');
@@ -128,7 +90,11 @@
         localStorage.setItem('submissionNumber1', JSON.stringify(submissionNumber1));
         localStorage.setItem('submissionNumber2', JSON.stringify(submissionNumber2));
         localStorage.setItem('submissionNumber3', JSON.stringify(submissionNumber3));
-        localStorage.setItem('submissionNumber4', JSON.stringify(submissionNumber4));
+                localStorage.setItem('submissionNumber4', JSON.stringify(submissionNumber4));
+
+        // Lock user after voting
+        sessionStorage.setItem('isLocked', 'true');
+        disableForms(); // Disable voting forms
 
         alert('Votes submitted successfully!');
         voteForm1.reset();
@@ -138,6 +104,49 @@
       } else {
         alert('Please select an option in all categories before submitting.');
       }
+    }
+
+    function disableForms() {
+      var forms = document.querySelectorAll('form');
+      forms.forEach(function(form) {
+        form.querySelectorAll('input[type="radio"]').forEach(function(input) {
+          input.disabled = true;
+        });
+        form.querySelector('.submit-btn').disabled = true;
+      });
+    }
+
+    function clearVotes() {
+      localStorage.removeItem('submittedValues1');
+      localStorage.removeItem('submittedValues2');
+      localStorage.removeItem('submittedValues3');
+      localStorage.removeItem('submittedValues4');
+      localStorage.removeItem('submissionNumber1');
+      localStorage.removeItem('submissionNumber2');
+      localStorage.removeItem('submissionNumber3');
+      localStorage.removeItem('submissionNumber4');
+
+      // Unlock user after clearing votes
+      sessionStorage.removeItem('isLocked');
+      enableForms(); // Enable voting forms
+
+      alert('Stored votes cleared successfully!');
+      location.reload(); // Reload the page after clearing votes
+    }
+
+    function enableForms() {
+      var forms = document.querySelectorAll('form');
+      forms.forEach(function(form) {
+        form.querySelectorAll('input[type="radio"]').forEach(function(input) {
+          input.disabled = false;
+        });
+        form.querySelector('.submit-btn').disabled = false;
+      });
+    }
+
+    // Initialize form states based on user locking
+    if (isLocked) {
+      disableForms(); // Disable voting forms if user is locked
     }
   </script>
 </body>
