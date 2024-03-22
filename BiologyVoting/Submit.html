@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Input and Submit</title>
+</head>
+<body>
+  <div class="container">
+    <input type="text" id="inputValue" class="input-field" placeholder="Enter a value">
+    <button onclick="submitValue()" class="submit-btn">Submit</button>
+  </div>
+
+  <script>
+    function submitValue() {
+      var inputValue = document.getElementById('inputValue').value;
+      localStorage.setItem('storedValue', inputValue);
+      alert('Value submitted successfully!');
+    }
+  </script>
+</body>
+</html>
