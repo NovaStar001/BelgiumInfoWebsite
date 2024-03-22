@@ -3,21 +3,39 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Input and Submit</title>
+  <title>Vote Submission</title>
 </head>
 <body>
   <div class="container">
-    <input type="text" id="inputValue" class="input-field" placeholder="Enter a value">
-    <button onclick="submitValue()" class="submit-btn">Submit</button>
+    <form id="voteForm">
+      <p>Vote for your favorite:</p>
+      <input type="radio" name="vote" value="Option 1"> Option 1<br>
+      <input type="radio" name="vote" value="Option 2"> Option 2<br>
+      <input type="radio" name="vote" value="Option 3"> Option 3<br>
+      <input type="radio" name="vote" value="Option 4"> Option 4<br>
+      <input type="radio" name="vote" value="Option 5"> Option 5<br>
+      <button type="button" onclick="submitVote()" class="submit-btn">Submit</button>
+    </form>
   </div>
 
   <script>
-    function submitValue() {
-      var inputValue = document.getElementById('inputValue').value;
-      var submittedValues = JSON.parse(localStorage.getItem('submittedValues')) || [];
-      submittedValues.push(inputValue);
-      localStorage.setItem('submittedValues', JSON.stringify(submittedValues));
-      alert('Value submitted successfully!');
+    var submissionNumber = JSON.parse(localStorage.getItem('submissionNumber')) || 1;
+
+    function submitVote() {
+      var voteForm = document.getElementById('voteForm');
+      var selectedOption = voteForm.querySelector('input[name="vote"]:checked');
+      if (selectedOption) {
+        var submittedValues = JSON.parse(localStorage.getItem('submittedValues')) || [];
+        var submissionLabel = 'Submission ' + submissionNumber + ': ';
+        submittedValues.push(submissionLabel + selectedOption.value);
+        localStorage.setItem('submittedValues', JSON.stringify(submittedValues));
+        submissionNumber++;
+        localStorage.setItem('submissionNumber', JSON.stringify(submissionNumber));
+        alert('Vote submitted successfully!');
+        voteForm.reset();
+      } else {
+        alert('Please select an option before submitting.');
+      }
     }
   </script>
 </body>
