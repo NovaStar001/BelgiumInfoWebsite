@@ -14,7 +14,9 @@
   <script>
     function submitValue() {
       var inputValue = document.getElementById('inputValue').value;
-      localStorage.setItem('storedValue', inputValue);
+      var submittedValues = JSON.parse(localStorage.getItem('submittedValues')) || [];
+      submittedValues.push(inputValue);
+      localStorage.setItem('submittedValues', JSON.stringify(submittedValues));
       alert('Value submitted successfully!');
     }
   </script>
