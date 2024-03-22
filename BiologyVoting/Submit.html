@@ -7,34 +7,87 @@
 </head>
 <body>
   <div class="container">
-    <form id="voteForm">
-      <p>Vote for your favorite:</p>
-      <input type="radio" name="vote" value="Option 1"> Option 1<br>
-      <input type="radio" name="vote" value="Option 2"> Option 2<br>
-      <input type="radio" name="vote" value="Option 3"> Option 3<br>
-      <input type="radio" name="vote" value="Option 4"> Option 4<br>
-      <input type="radio" name="vote" value="Option 5"> Option 5<br>
-      <button type="button" onclick="submitVote()" class="submit-btn">Submit</button>
+    <form id="form1">
+      <p>Vote for your favorite (Category 1):</p>
+      <input type="radio" name="vote1" value="Option 1"> Option 1<br>
+      <input type="radio" name="vote1" value="Option 2"> Option 2<br>
+    </form>
+
+    <form id="form2">
+      <p>Vote for your favorite (Category 2):</p>
+      <input type="radio" name="vote2" value="Option 1"> Option 1<br>
+      <input type="radio" name="vote2" value="Option 2"> Option 2<br>
+    </form>
+
+    <form id="form3">
+      <p>Vote for your favorite (Category 3):</p>
+      <input type="radio" name="vote3" value="Option 1"> Option 1<br>
+      <input type="radio" name="vote3" value="Option 2"> Option 2<br>
+    </form>
+
+    <form id="form4">
+      <p>Vote for your favorite (Category 4):</p>
+      <input type="radio" name="vote4" value="Option 1"> Option 1<br>
+      <input type="radio" name="vote4" value="Option 2"> Option 2<br>
+      <button type="button" onclick="submitVotes()" class="submit-btn">Submit</button>
     </form>
   </div>
 
   <script>
-    var submissionNumber = JSON.parse(localStorage.getItem('submissionNumber')) || 1;
+    var submissionNumber1 = JSON.parse(localStorage.getItem('submissionNumber1')) || 1;
+    var submissionNumber2 = JSON.parse(localStorage.getItem('submissionNumber2')) || 1;
+    var submissionNumber3 = JSON.parse(localStorage.getItem('submissionNumber3')) || 1;
+    var submissionNumber4 = JSON.parse(localStorage.getItem('submissionNumber4')) || 1;
 
-    function submitVote() {
-      var voteForm = document.getElementById('voteForm');
-      var selectedOption = voteForm.querySelector('input[name="vote"]:checked');
-      if (selectedOption) {
-        var submittedValues = JSON.parse(localStorage.getItem('submittedValues')) || [];
-        var submissionLabel = 'Submission ' + submissionNumber + ': ';
-        submittedValues.push(submissionLabel + selectedOption.value);
-        localStorage.setItem('submittedValues', JSON.stringify(submittedValues));
-        submissionNumber++;
-        localStorage.setItem('submissionNumber', JSON.stringify(submissionNumber));
-        alert('Vote submitted successfully!');
-        voteForm.reset();
+    function submitVotes() {
+      var voteForm1 = document.getElementById('form1');
+      var voteForm2 = document.getElementById('form2');
+      var voteForm3 = document.getElementById('form3');
+      var voteForm4 = document.getElementById('form4');
+
+      var selectedOption1 = voteForm1.querySelector('input[name="vote1"]:checked');
+      var selectedOption2 = voteForm2.querySelector('input[name="vote2"]:checked');
+      var selectedOption3 = voteForm3.querySelector('input[name="vote3"]:checked');
+      var selectedOption4 = voteForm4.querySelector('input[name="vote4"]:checked');
+
+      if (selectedOption1 && selectedOption2 && selectedOption3 && selectedOption4) {
+        var submittedValues1 = JSON.parse(localStorage.getItem('submittedValues1')) || [];
+        var submittedValues2 = JSON.parse(localStorage.getItem('submittedValues2')) || [];
+        var submittedValues3 = JSON.parse(localStorage.getItem('submittedValues3')) || [];
+        var submittedValues4 = JSON.parse(localStorage.getItem('submittedValues4')) || [];
+
+        var submissionLabel1 = 'Submission ' + submissionNumber1 + ' (Category 1): ';
+        var submissionLabel2 = 'Submission ' + submissionNumber2 + ' (Category 2): ';
+        var submissionLabel3 = 'Submission ' + submissionNumber3 + ' (Category 3): ';
+        var submissionLabel4 = 'Submission ' + submissionNumber4 + ' (Category 4): ';
+
+        submittedValues1.push(submissionLabel1 + selectedOption1.value);
+        submittedValues2.push(submissionLabel2 + selectedOption2.value);
+        submittedValues3.push(submissionLabel3 + selectedOption3.value);
+        submittedValues4.push(submissionLabel4 + selectedOption4.value);
+
+        localStorage.setItem('submittedValues1', JSON.stringify(submittedValues1));
+        localStorage.setItem('submittedValues2', JSON.stringify(submittedValues2));
+        localStorage.setItem('submittedValues3', JSON.stringify(submittedValues3));
+        localStorage.setItem('submittedValues4', JSON.stringify(submittedValues4));
+
+        submissionNumber1++;
+        submissionNumber2++;
+        submissionNumber3++;
+        submissionNumber4++;
+
+        localStorage.setItem('submissionNumber1', JSON.stringify(submissionNumber1));
+        localStorage.setItem('submissionNumber2', JSON.stringify(submissionNumber2));
+        localStorage.setItem('submissionNumber3', JSON.stringify(submissionNumber3));
+        localStorage.setItem('submissionNumber4', JSON.stringify(submissionNumber4));
+
+        alert('Votes submitted successfully!');
+        voteForm1.reset();
+        voteForm2.reset();
+        voteForm3.reset();
+        voteForm4.reset();
       } else {
-        alert('Please select an option before submitting.');
+        alert('Please select an option in all categories before submitting.');
       }
     }
   </script>
