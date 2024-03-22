@@ -8,23 +8,42 @@
 <body>
   <div class="display-container">
     <h2>Submitted Votes:</h2>
-    <ul id="displayList" class="display-list"></ul>
+    <ul id="displayList1" class="display-list"></ul>
+    <h2>Submitted Votes (Category 2):</h2>
+    <ul id="displayList2" class="display-list"></ul>
+    <h2>Submitted Votes (Category 3):</h2>
+    <ul id="displayList3" class="display-list"></ul>
+    <h2>Submitted Votes (Category 4):</h2>
+    <ul id="displayList4" class="display-list"></ul>
     <button onclick="clearVotes()" class="clear-btn">Clear Votes</button>
   </div>
 
   <script>
-    var submittedValues = JSON.parse(localStorage.getItem('submittedValues')) || [];
-    var displayList = document.getElementById('displayList');
+    function displayVotes(categoryId, listId) {
+      var submittedValues = JSON.parse(localStorage.getItem(categoryId)) || [];
+      var displayList = document.getElementById(listId);
 
-    submittedValues.forEach(function(value) {
-      var listItem = document.createElement('li');
-      listItem.textContent = value;
-      displayList.appendChild(listItem);
-    });
+      submittedValues.forEach(function(value) {
+        var listItem = document.createElement('li');
+        listItem.textContent = value;
+        displayList.appendChild(listItem);
+      });
+    }
+
+    displayVotes('submittedValues1', 'displayList1');
+    displayVotes('submittedValues2', 'displayList2');
+    displayVotes('submittedValues3', 'displayList3');
+    displayVotes('submittedValues4', 'displayList4');
 
     function clearVotes() {
-      localStorage.removeItem('submittedValues');
-      localStorage.removeItem('submissionNumber');
+      localStorage.removeItem('submittedValues1');
+      localStorage.removeItem('submittedValues2');
+      localStorage.removeItem('submittedValues3');
+      localStorage.removeItem('submittedValues4');
+      localStorage.removeItem('submissionNumber1');
+      localStorage.removeItem('submissionNumber2');
+      localStorage.removeItem('submissionNumber3');
+      localStorage.removeItem('submissionNumber4');
       alert('Stored votes cleared successfully!');
       location.reload(); // Reload the page after clearing votes
     }
