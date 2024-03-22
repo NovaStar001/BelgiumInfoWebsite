@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Display Stored Value</title>
+</head>
+<body>
+  <div class="display-container">
+    <p class="display-value" id="displayValue"></p>
+  </div>
+
+  <script>
+    var storedValue = localStorage.getItem('storedValue');
+    if (storedValue) {
+      document.getElementById('displayValue').textContent = 'Stored Value: ' + storedValue;
+    } else {
+      document.getElementById('displayValue').textContent = 'No value stored.';
+    }
+  </script>
+</body>
+</html>
