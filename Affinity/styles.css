@@ -19,13 +19,13 @@ h1 {
 
 @keyframes changeColor {
   0% {
-    color: #ffe900; /* Light yellow color */
+    color: #ffe000; /* Light yellow color */
   }
   66% {
     color: #ffd700; /* Deeper yellow color */
   }
   100% {
-    color: #ffe900;
+    color: #ffe000;
   }
 }
 
