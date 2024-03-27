@@ -22,16 +22,52 @@
         box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
     }
 
-    .plant {
-        background-color: green;
+    .bradley-milk-cap {
+        background-color: #996633; /* Brown */
     }
 
-    .herbivore {
-        background-color: yellow;
+    .jelly-roll-fungus {
+        background-color: #8B0000; /* Dark Red */
     }
 
-    .carnivore {
-        background-color: red;
+    .rhododendron {
+        background-color: #FF00FF; /* Pink */
+    }
+
+    .mountain-laurel {
+        background-color: #800080; /* Purple */
+    }
+
+    .fox-squirrel {
+        background-color: #996633; /* Brown */
+    }
+
+    .red-breasted-nuthatch {
+        background-color: #FF0000; /* Red */
+    }
+
+    .yellow-bellied-sapsucker {
+        background-color: #FFFF00; /* Yellow */
+    }
+
+    .old-world-porcupine {
+        background-color: #A52A2A; /* Brown */
+    }
+
+    .opossum {
+        background-color: #333333; /* Dark Grey */
+    }
+
+    .black-bear {
+        background-color: #000000; /* Black */
+    }
+
+    .white-tailed-deer {
+        background-color: #FFFFFF; /* White */
+    }
+
+    .moose {
+        background-color: #996633; /* Brown */
     }
 
     .link {
@@ -44,64 +80,76 @@
 </head>
 <body>
 <div id="container">
-    <div class="organism plant" id="plant"></div>
-    <div class="organism herbivore" id="herbivore"></div>
-    <div class="organism carnivore" id="carnivore"></div>
-    <div class="link" id="link1"></div>
-    <div class="link" id="link2"></div>
+    <div class="organism bradley-milk-cap" id="bradley-milk-cap"></div>
+    <div class="organism jelly-roll-fungus" id="jelly-roll-fungus"></div>
+    <div class="organism rhododendron" id="rhododendron"></div>
+    <div class="organism mountain-laurel" id="mountain-laurel"></div>
+    <div class="organism fox-squirrel" id="fox-squirrel"></div>
+    <div class="organism red-breasted-nuthatch" id="red-breasted-nuthatch"></div>
+    <div class="organism yellow-bellied-sapsucker" id="yellow-bellied-sapsucker"></div>
+    <div class="organism old-world-porcupine" id="old-world-porcupine"></div>
+    <div class="organism opossum" id="opossum"></div>
+    <div class="organism black-bear" id="black-bear"></div>
+    <div class="organism white-tailed-deer" id="white-tailed-deer"></div>
+    <div class="organism moose" id="moose"></div>
 </div>
 
 <script>
     // JavaScript code for simulation
 
     // Get references to elements
-    const plant = document.getElementById('plant');
-    const herbivore = document.getElementById('herbivore');
-    const carnivore = document.getElementById('carnivore');
-    const link1 = document.getElementById('link1');
-    const link2 = document.getElementById('link2');
+    const organisms = document.querySelectorAll('.organism');
+    const links = [];
 
-    // Initial positions
-    let plantX = 50, plantY = 200;
-    let herbivoreX = 300, herbivoreY = 50;
-    let carnivoreX = 600, carnivoreY = 200;
+    // Initialize positions and add links
+    organisms.forEach((organism, index) => {
+        let x = Math.random() * 700 + 50; // Random x position within the container
+        let y = Math.random() * 500 + 50; // Random y position within the container
+        organism.style.left = `${x}px`;
+        organism.style.top = `${y}px`;
 
-    // Set initial positions
-    plant.style.left = `${plantX}px`;
-    plant.style.top = `${plantY}px`;
-    herbivore.style.left = `${herbivoreX}px`;
-    herbivore.style.top = `${herbivoreY}px`;
-    carnivore.style.left = `${carnivoreX}px`;
-    carnivore.style.top = `${carnivoreY}px`;
+        // Create links between organisms (excluding the last organism)
+        if (index < organisms.length - 1) {
+            const link = document.createElement('div');
+            link.className = 'link';
+            links.push(link);
+            document.getElementById('container').appendChild(link);
+        }
+    });
 
     // Simulation loop
     setInterval(() => {
         // Move organisms randomly
-        plantX += Math.random() * 4 - 2;
-        plantY += Math.random() * 4 - 2;
-        herbivoreX += Math.random() * 4 - 2;
-        herbivoreY += Math.random() * 4 - 2;
-        carnivoreX += Math.random() * 4 - 2;
-        carnivoreY += Math.random() * 4 - 2;
+        organisms.forEach(organism => {
+            let x = parseFloat(organism.style.left) + Math.random() * 4 - 2;
+            let y = parseFloat(organism.style.top) + Math.random() * 4 - 2;
 
-        // Update positions
-        plant.style.left = `${plantX}px`;
-        plant.style.top = `${plantY}px`;
-        herbivore.style.left = `${herbivoreX}px`;
-        herbivore.style.top = `${herbivoreY}px`;
-        carnivore.style.left = `${carnivoreX}px`;
-        carnivore.style.top = `${carnivoreY}px`;
+            // Keep organisms within the container
+            if (x < 0) x = 0;
+            if (x > 750) x = 750;
+            if (y < 0) y = 0;
+            if (y > 550) y = 550;
 
-        // Update links
-        link1.style.left = `${(plantX + 25)}px`;
-        link1.style.top = `${(plantY + 25)}px`;
-        link1.style.width = `${(herbivoreX + 25 - (plantX + 25))}px`;
-        link1.style.height = `${(herbivoreY + 25 - (plantY + 25))}px`;
+            organism.style.left = `${x}px`;
+            organism.style.top = `${y}px`;
+        });
 
-        link2.style.left = `${(herbivoreX + 25)}px`;
-        link2.style.top = `${(herbivoreY + 25)}px`;
-        link2.style.width = `${(carnivoreX + 25 - (herbivoreX + 25))}px`;
-        link2.style.height = `${(carnivoreY + 25 - (herbivoreY + 25))}px`;
+        // Update links between organisms
+        for (let i = 0; i < links.length; i++) {
+            const start = organisms[i];
+            const end = organisms[i + 1];
+            const link = links[i];
+
+            const startX = parseFloat(start.style.left) + 25;
+            const startY = parseFloat(start.style.top) + 25;
+            const endX = parseFloat(end.style.left) + 25;
+            const endY = parseFloat(end.style.top) + 25;
+
+            link.style.left = `${startX}px`;
+            link.style.top = `${startY}px`;
+            link.style.width = `${endX - startX}px`;
+            link.style.height = `${endY - startY}px`;
+        }
     }, 1000 / 30); // 30 frames per second
 </script>
 </body>
