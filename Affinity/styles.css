@@ -14,11 +14,11 @@ h1 {
   font-size: 36px;
   margin: 0;
   color: transparent;
-  background-image: linear-gradient(to right, #ffd700, #ff9900, #ffd700);
+  background-image: linear-gradient(to right, #ffffcc, #ffd700); /* Light yellow to deep yellow gradient */
   background-size: 200% auto;
   -webkit-background-clip: text;
   background-clip: text;
-  animation: animateGold 2s linear infinite;
+  animation: animateGold 4s linear infinite;
 }
 
 @keyframes animateGold {
