@@ -121,8 +121,8 @@
     setInterval(() => {
         // Move organisms randomly within the container
         organisms.forEach(organism => {
-            let x = parseFloat(organism.style.left) + Math.random() * 4 - 2;
-            let y = parseFloat(organism.style.top) + Math.random() * 4 - 2;
+            let x = parseFloat(organism.style.left) + Math.random() * 16 - 2;
+            let y = parseFloat(organism.style.top) + Math.random() * 16 - 2;
 
             // Keep organisms within the container
             if (x < 0) x = 0;
