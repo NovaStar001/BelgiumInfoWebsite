@@ -1,13 +1,33 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background-color: #000;
-  color: #fff;
+  background-color: #f0f0f0;
+  min-height: 100vh; /* Ensure the body covers the full viewport height */
+  position: relative; /* Set position to relative for footer positioning */
 }
 
 header {
-  background-color: #000;
+  background-color: #333;
+  color: #fff;
   padding: 20px;
+}
+
+main {
+  padding: 20px;
+}
+
+footer {
+  background-color: #333;
+  color: #fff;
+  text-align: center;
+  padding: 10px;
+  position: absolute; /* Set the footer to absolute positioning */
+  bottom: 0; /* Position the footer at the bottom of the viewport */
+  width: 100%; /* Ensure the footer spans the entire width */
+}
+
+section {
+  margin-bottom: 20px; /* Add margin below each section for spacing */
 }
 
 h1 {
@@ -28,18 +48,6 @@ h1 {
     color: #fff01c;
   }
 }
-
-main {
-  padding: 20px;
-}
-
-footer {
-  background-color: #000;
-  color: #ffd700; /* Gold color */
-  text-align: center;
-  padding: 10px;
-}
-
 .animated-section {
   height: 2000px; /* Increase the height for scrolling */
   position: relative;
