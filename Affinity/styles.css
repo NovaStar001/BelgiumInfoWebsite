@@ -4,6 +4,7 @@ body {
   background-color: #000000;
   min-height: 100vh; /* Ensure the body covers the full viewport height */
   position: relative; /* Set position to relative for footer positioning */
+  color: #fff; /* Set text color to white */
 }
 
 header {
@@ -18,7 +19,7 @@ main {
 
 footer {
   background-color: #222;
-  color: #fff;
+  color: #ffd700;
   text-align: center;
   padding: 10px;
   position: absolute; /* Set the footer to absolute positioning */
