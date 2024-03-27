@@ -1,6 +1,7 @@
 body {
   margin: 0;
   font-family: Arial, sans-serif;
+  background-color: #f0f0f0;
 }
 
 header {
@@ -21,19 +22,22 @@ footer {
 }
 
 .animated-section {
-  margin-bottom: 100vh; /* Create space for scrolling animation */
-  text-align: center;
+  height: 2000px; /* Increase the height for scrolling */
+  position: relative;
 }
 
-.animated-box {
-  width: 100px;
-  height: 100px;
+.shape {
+  position: absolute;
+  width: 50px;
+  height: 50px;
   background-color: #f00;
-  margin: 20px auto;
   transition: transform 0.5s ease-in-out;
 }
 
-.animated {
-  transform: translateY(0);
-  opacity: 1;
+.shape:nth-child(2n) {
+  background-color: #00f;
+}
+
+.shape:nth-child(3n) {
+  background-color: #0f0;
 }
