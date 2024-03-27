@@ -11,6 +11,7 @@
         flex-wrap: wrap;
         gap: 20px;
         justify-content: center;
+        position: relative;
     }
 
     .tile {
@@ -26,31 +27,43 @@
 
     .arrow {
         position: absolute;
-        width: 80px;
+        width: 0;
         height: 0;
-        border: solid black;
-        border-width: 0 3px 3px 0;
+        border-style: solid;
+        border-width: 15px 0 15px 25px;
+        border-color: transparent transparent transparent black;
         transform: rotate(45deg);
+        z-index: -1;
     }
 </style>
 </head>
 <body>
 <div id="container">
-    <!-- Animals tiles -->
-    <div class="tile" id="opossum">Opossum</div>
-    <div class="tile" id="black-bear">Black Bear</div>
-    <div class="tile" id="fox-squirrel">Fox Squirrel</div>
-    <div class="tile" id="red-breasted-nuthatch">Red Breasted Nuthatches</div>
-    <div class="tile" id="yellow-bellied-sapsucker">Yellow Bellied Sapsucker</div>
-    <div class="tile" id="old-world-porcupine">Old World Porcupine</div>
-    <div class="tile" id="white-tailed-deer">White Tailed Deer</div>
-    <div class="tile" id="moose">Moose</div>
+    <!-- Plants -->
+    <div class="tile plant" id="rhododendron">Rhododendron</div>
+    <div class="tile plant" id="mountain-laurel">Mountain Laurel</div>
+
+    <!-- Fungi -->
+    <div class="tile fungus" id="bradley-milk-cap">Bradley Milk Cap</div>
+    <div class="tile fungus" id="jelly-roll-fungus">Jelly Roll Fungus</div>
+
+    <!-- Herbivores -->
+    <div class="tile herbivore" id="fox-squirrel">Fox Squirrel</div>
+    <div class="tile herbivore" id="red-breasted-nuthatch">Red Breasted Nuthatches</div>
+    <div class="tile herbivore" id="yellow-bellied-sapsucker">Yellow Bellied Sapsucker</div>
+    <div class="tile herbivore" id="old-world-porcupine">Old World Porcupine</div>
+    <div class="tile herbivore" id="white-tailed-deer">White Tailed Deer</div>
+    <div class="tile herbivore" id="moose">Moose</div>
+
+    <!-- Carnivores -->
+    <div class="tile carnivore" id="opossum">Opossum</div>
+    <div class="tile carnivore" id="black-bear">Black Bear</div>
 </div>
 
 <script>
     // JavaScript code for interactive food web
 
-    // Function to create an arrow connection between two tiles
+    // Function to create an arrow
     function createArrow(fromTile, toTile) {
         const arrow = document.createElement('div');
         arrow.className = 'arrow';
@@ -61,12 +74,43 @@
         const fromRect = fromTile.getBoundingClientRect();
         const toRect = toTile.getBoundingClientRect();
 
-        const offsetX = fromRect.left - toRect.left;
-        const offsetY = fromRect.top - toRect.top;
+        arrow.style.left = `${fromRect.left + fromRect.width / 2}px`;
+        arrow.style.top = `${fromRect.top + fromRect.height / 2}px`;
 
-        arrow.style.left = `${toRect.width / 2 + offsetX}px`;
-        arrow.style.top = `${toRect.height / 2 + offsetY}px`;
+        const deltaX = toRect.left - fromRect.left;
+        const deltaY = toRect.top - fromRect.top;
+        const angle = Math.atan2(deltaY, deltaX) * (180 / Math.PI);
+
+        arrow.style.transform = `rotate(${angle}deg)`;
+        arrow.style.width = `${Math.sqrt(deltaX ** 2 + deltaY ** 2)}px`;
     }
+
+    // Create arrows on page load
+    const plants = document.querySelectorAll('.plant');
+    const herbivores = document.querySelectorAll('.herbivore');
+    const carnivores = document.querySelectorAll('.carnivore');
+    const fungi = document.querySelectorAll('.fungus');
+
+    plants.forEach(plant => {
+        herbivores.forEach(herbivore => {
+            createArrow(plant, herbivore);
+        });
+    });
+
+    herbivores.forEach(herbivore => {
+        carnivores.forEach(carnivore => {
+            createArrow(herbivore, carnivore);
+        });
+        fungi.forEach(fungus => {
+            createArrow(herbivore, fungus);
+        });
+    });
+
+    carnivores.forEach(carnivore => {
+        fungi.forEach(fungus => {
+            createArrow(carnivore, fungus);
+        });
+    });
 
     // Add click event listener to each tile
     const tiles = document.querySelectorAll('.tile');
@@ -80,13 +124,6 @@
             arrows.forEach(arrow => {
                 if (arrow.parentNode === document.getElementById('container')) {
                     arrow.remove();
-                }
-            });
-
-            // Create new arrow connections after tile removal
-            tiles.forEach(fromTile => {
-                if (fromTile !== tile) {
-                    createArrow(fromTile, tile);
                 }
             });
         });
