@@ -7,7 +7,7 @@ body {
 
 header {
   background-color: #000;
-  color: #ffd700; /* Gold color */
+  color: #ffd700; /* Initial gold color */
   padding: 20px;
 }
 
@@ -17,7 +17,7 @@ main {
 
 footer {
   background-color: #000;
-  color: #ffd700; /* Gold color */
+  color: #ffd700; /* Initial gold color */
   text-align: center;
   padding: 10px;
 }
@@ -31,8 +31,9 @@ footer {
   position: absolute;
   width: 50px;
   height: 50px;
-  background-color: #ffd700; /* Gold color */
-  transition: transform 0.5s ease-in-out;
+  background-color: #ffd700; /* Initial gold color */
+  transition: transform 0.5s ease-in-out, background-color 0.5s ease-in-out;
+  animation: colorChange 5s infinite alternate; /* Animation for color change */
 }
 
 .shape:nth-child(2n) {
@@ -41,4 +42,16 @@ footer {
 
 .shape:nth-child(3n) {
   background-color: #000; /* Black color */
+}
+
+@keyframes colorChange {
+  0% {
+    background-color: #ffd700; /* Initial gold color */
+  }
+  50% {
+    background-color: #ff9900; /* Intermediate color */
+  }
+  100% {
+    background-color: #ffd700; /* Final gold color */
+  }
 }
