@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Food Web Simulation</title>
+<style>
+    /* CSS styles for the simulation */
+    #container {
+        width: 800px;
+        height: 600px;
+        border: 1px solid #000;
+        position: relative;
+        margin: 20px auto;
+    }
+
+    .organism {
+        width: 50px;
+        height: 50px;
+        position: absolute;
+        border-radius: 50%;
+        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    }
+
+    .plant {
+        background-color: green;
+    }
+
+    .herbivore {
+        background-color: yellow;
+    }
+
+    .carnivore {
+        background-color: red;
+    }
+
+    .link {
+        position: absolute;
+        z-index: -1;
+        background-color: transparent;
+        border: 1px solid transparent;
+    }
+</style>
+</head>
+<body>
+<div id="container">
+    <div class="organism plant" id="plant"></div>
+    <div class="organism herbivore" id="herbivore"></div>
+    <div class="organism carnivore" id="carnivore"></div>
+    <div class="link" id="link1"></div>
+    <div class="link" id="link2"></div>
+</div>
+
+<script>
+    // JavaScript code for simulation
+
+    // Get references to elements
+    const plant = document.getElementById('plant');
+    const herbivore = document.getElementById('herbivore');
+    const carnivore = document.getElementById('carnivore');
+    const link1 = document.getElementById('link1');
+    const link2 = document.getElementById('link2');
+
+    // Initial positions
+    let plantX = 50, plantY = 200;
+    let herbivoreX = 300, herbivoreY = 50;
+    let carnivoreX = 600, carnivoreY = 200;
+
+    // Set initial positions
+    plant.style.left = `${plantX}px`;
+    plant.style.top = `${plantY}px`;
+    herbivore.style.left = `${herbivoreX}px`;
+    herbivore.style.top = `${herbivoreY}px`;
+    carnivore.style.left = `${carnivoreX}px`;
+    carnivore.style.top = `${carnivoreY}px`;
+
+    // Simulation loop
+    setInterval(() => {
+        // Move organisms randomly
+        plantX += Math.random() * 4 - 2;
+        plantY += Math.random() * 4 - 2;
+        herbivoreX += Math.random() * 4 - 2;
+        herbivoreY += Math.random() * 4 - 2;
+        carnivoreX += Math.random() * 4 - 2;
+        carnivoreY += Math.random() * 4 - 2;
+
+        // Update positions
+        plant.style.left = `${plantX}px`;
+        plant.style.top = `${plantY}px`;
+        herbivore.style.left = `${herbivoreX}px`;
+        herbivore.style.top = `${herbivoreY}px`;
+        carnivore.style.left = `${carnivoreX}px`;
+        carnivore.style.top = `${carnivoreY}px`;
+
+        // Update links
+        link1.style.left = `${(plantX + 25)}px`;
+        link1.style.top = `${(plantY + 25)}px`;
+        link1.style.width = `${(herbivoreX + 25 - (plantX + 25))}px`;
+        link1.style.height = `${(herbivoreY + 25 - (plantY + 25))}px`;
+
+        link2.style.left = `${(herbivoreX + 25)}px`;
+        link2.style.top = `${(herbivoreY + 25)}px`;
+        link2.style.width = `${(carnivoreX + 25 - (herbivoreX + 25))}px`;
+        link2.style.height = `${(carnivoreY + 25 - (herbivoreY + 25))}px`;
+    }, 1000 / 30); // 30 frames per second
+</script>
+</body>
+</html>
