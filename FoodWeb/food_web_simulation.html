@@ -3,144 +3,94 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Food Web Simulation</title>
+<title>Interactive Food Web</title>
 <style>
-    /* CSS styles for the simulation */
+    /* CSS styles for the interactive food web */
     #container {
-        width: 800px;
-        height: 600px;
-        border: 1px solid #000;
-        position: relative;
-        margin: 20px auto;
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        justify-content: center;
     }
 
-    .organism {
-        width: 50px;
-        height: 50px;
-        position: absolute;
-        border-radius: 50%;
-        box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.5);
+    .tile {
+        width: 100px;
+        height: 100px;
+        border: 2px solid #000;
         display: flex;
         justify-content: center;
         align-items: center;
-        font-weight: bold;
-        color: white;
+        position: relative;
+        cursor: pointer;
     }
 
-    .carnivore {
-        background-color: #FF0000; /* Red */
-    }
-
-    .herbivore {
-        background-color: #00FF00; /* Green */
-    }
-
-    .fungus {
-        background-color: #9932CC; /* Dark Violet */
-    }
-
-    .plant {
-        background-color: #008000; /* Dark Green */
-    }
-
-    .link {
+    .arrow {
         position: absolute;
-        z-index: -1;
-        background-color: transparent;
-        border: 1px solid transparent;
+        width: 80px;
+        height: 0;
+        border: solid black;
+        border-width: 0 3px 3px 0;
+        transform: rotate(45deg);
     }
 </style>
 </head>
 <body>
 <div id="container">
-    <!-- Carnivores -->
-    <div class="organism carnivore" id="opossum">Opossum</div>
-    <div class="organism carnivore" id="black-bear">Black Bear</div>
-
-    <!-- Herbivores -->
-    <div class="organism herbivore" id="fox-squirrel">Fox Squirrel</div>
-    <div class="organism herbivore" id="red-breasted-nuthatch">Red Breasted Nuthatches</div>
-    <div class="organism herbivore" id="yellow-bellied-sapsucker">Yellow Bellied Sapsucker</div>
-    <div class="organism herbivore" id="old-world-porcupine">Old World Porcupine</div>
-    <div class="organism herbivore" id="white-tailed-deer">White Tailed Deer</div>
-    <div class="organism herbivore" id="moose">Moose</div>
-
-    <!-- Fungus -->
-    <div class="organism fungus" id="bradley-milk-cap">Bradley Milk Cap</div>
-    <div class="organism fungus" id="jelly-roll-fungus">Jelly Roll Fungus</div>
-
-    <!-- Plants -->
-    <div class="organism plant" id="rhododendron">Rhododendron</div>
-    <div class="organism plant" id="mountain-laurel">Mountain Laurel</div>
-
-    <!-- Links -->
-    <div class="link" id="link1"></div>
-    <div class="link" id="link2"></div>
-    <div class="link" id="link3"></div>
-    <div class="link" id="link4"></div>
-    <div class="link" id="link5"></div>
-    <div class="link" id="link6"></div>
-    <div class="link" id="link7"></div>
-    <div class="link" id="link8"></div>
+    <!-- Animals tiles -->
+    <div class="tile" id="opossum">Opossum</div>
+    <div class="tile" id="black-bear">Black Bear</div>
+    <div class="tile" id="fox-squirrel">Fox Squirrel</div>
+    <div class="tile" id="red-breasted-nuthatch">Red Breasted Nuthatches</div>
+    <div class="tile" id="yellow-bellied-sapsucker">Yellow Bellied Sapsucker</div>
+    <div class="tile" id="old-world-porcupine">Old World Porcupine</div>
+    <div class="tile" id="white-tailed-deer">White Tailed Deer</div>
+    <div class="tile" id="moose">Moose</div>
 </div>
 
 <script>
-    // JavaScript code for simulation
+    // JavaScript code for interactive food web
 
-    // Get references to elements
-    const organisms = document.querySelectorAll('.organism');
-    const links = [];
+    // Function to create an arrow connection between two tiles
+    function createArrow(fromTile, toTile) {
+        const arrow = document.createElement('div');
+        arrow.className = 'arrow';
 
-    // Define prey relationships
-    const preyRelationships = {
-        'opossum': ['fox-squirrel', 'red-breasted-nuthatch', 'yellow-bellied-sapsucker', 'old-world-porcupine', 'white-tailed-deer', 'moose'],
-        'black-bear': ['moose'],
-        'bradley-milk-cap': ['opossum'],
-        'jelly-roll-fungus': ['opossum'],
-        'rhododendron': ['fox-squirrel', 'red-breasted-nuthatch', 'yellow-bellied-sapsucker', 'old-world-porcupine', 'white-tailed-deer', 'moose'],
-        'mountain-laurel': ['fox-squirrel', 'red-breasted-nuthatch', 'yellow-bellied-sapsucker', 'old-world-porcupine', 'white-tailed-deer', 'moose'],
-    };
+        const container = document.getElementById('container');
+        container.appendChild(arrow);
 
-    // Initialize positions and add links
-    organisms.forEach((organism, index) => {
-        let x = Math.random() * 700 + 50; // Random x position within the container
-        let y = Math.random() * 500 + 50; // Random y position within the container
-        organism.style.left = `${x}px`;
-        organism.style.top = `${y}px`;
+        const fromRect = fromTile.getBoundingClientRect();
+        const toRect = toTile.getBoundingClientRect();
 
-        // Create links between organisms (excluding the last organism)
-        if (index < organisms.length - 1) {
-            const link = document.createElement('div');
-            link.className = 'link';
-            links.push(link);
-            document.getElementById('container').appendChild(link);
-        }
-    });
+        const offsetX = fromRect.left - toRect.left;
+        const offsetY = fromRect.top - toRect.top;
 
+        arrow.style.left = `${toRect.width / 2 + offsetX}px`;
+        arrow.style.top = `${toRect.height / 2 + offsetY}px`;
+    }
 
-    // Simulation loop for movement
-    setInterval(() => {
-        // Move organisms randomly within the container (excluding plants and fungus)
-        organisms.forEach(organism => {
-            // Check if the organism is a plant or fungus
-            if (organism.classList.contains('plant') || organism.classList.contains('fungus')) {
-                return; // Skip movement for plants and fungus
-            }
+    // Add click event listener to each tile
+    const tiles = document.querySelectorAll('.tile');
+    tiles.forEach(tile => {
+        tile.addEventListener('click', () => {
+            // Remove the clicked tile
+            tile.remove();
 
-            let x = parseFloat(organism.style.left) + Math.random() * 16 - 8; // Adjust the range (8 - 4) for x movement
-            let y = parseFloat(organism.style.top) + Math.random() * 16 - 8; // Adjust the range (8 - 4) for y movement
+            // Remove arrow connections related to the clicked tile
+            const arrows = document.querySelectorAll('.arrow');
+            arrows.forEach(arrow => {
+                if (arrow.parentNode === document.getElementById('container')) {
+                    arrow.remove();
+                }
+            });
 
-            // Keep organisms within the container
-            if (x < 0) x = 0;
-            if (x > 750) x = 750;
-            if (y < 0) y = 0;
-            if (y > 550) y = 550;
-
-            organism.style.left = `${x}px`;
-            organism.style.top = `${y}px`;
+            // Create new arrow connections after tile removal
+            tiles.forEach(fromTile => {
+                if (fromTile !== tile) {
+                    createArrow(fromTile, tile);
+                }
+            });
         });
-    }, 100); // Adjust speed as needed
+    });
 </script>
 </body>
 </html>
-
