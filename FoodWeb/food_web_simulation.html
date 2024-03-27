@@ -117,33 +117,23 @@
         }
     });
 
-    // Simulation loop
+    // Simulation loop for movement
     setInterval(() => {
-        // Iterate over each organism to track and "kill" prey
-        organisms.forEach((organism, index) => {
-            // Skip the last organism as it doesn't have any prey
-            if (index === organisms.length - 1) return;
+        // Move organisms randomly within the container
+        organisms.forEach(organism => {
+            let x = parseFloat(organism.style.left) + Math.random() * 4 - 2;
+            let y = parseFloat(organism.style.top) + Math.random() * 4 - 2;
 
-            const prey = organisms[index + 1]; // Prey is the next organism in the list
-            const preyList = preyRelationships[organism.id]; // Get the prey list for the current organism
+            // Keep organisms within the container
+            if (x < 0) x = 0;
+            if (x > 750) x = 750;
+            if (y < 0) y = 0;
+            if (y > 550) y = 550;
 
-            // Check if the current organism preys on the next organism
-            if (preyList && preyList.includes(prey.id)) {
-                const orgRect = organism.getBoundingClientRect();
-                const preyRect = prey.getBoundingClientRect();
-
-                // Calculate distance between the centers of the organisms
-                const dx = orgRect.left + orgRect.width / 2 - (preyRect.left + preyRect.width / 2);
-                const dy = orgRect.top + orgRect.height / 2 - (preyRect.top + preyRect.height / 2);
-                const distance = Math.sqrt(dx * dx + dy * dy);
-
-                // If the distance is small enough, "kill" the prey by hiding it
-                if (distance < 60) {
-                    prey.style.visibility = 'hidden'; // Hide the prey
-                }
-            }
+            organism.style.left = `${x}px`;
+            organism.style.top = `${y}px`;
         });
-    }, 1000 / 30); // 30 frames per second
+    }, 100); // Adjust speed as needed
 </script>
 </body>
 </html>
