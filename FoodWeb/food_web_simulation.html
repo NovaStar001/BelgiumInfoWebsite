@@ -119,10 +119,15 @@
 
     // Simulation loop for movement
     setInterval(() => {
-        // Move organisms randomly within the container
+        // Move organisms randomly within the container (excluding plants and fungus)
         organisms.forEach(organism => {
-            let x = parseFloat(organism.style.left) + Math.random() * 16 - 2;
-            let y = parseFloat(organism.style.top) + Math.random() * 16 - 2;
+            // Check if the organism is a plant or fungus
+            if (organism.classList.contains('plant') || organism.classList.contains('fungus')) {
+                return; // Skip movement for plants and fungus
+            }
+
+            let x = parseFloat(organism.style.left) + Math.random() * 8 - 4; // Adjust the range (8 - 4) for x movement
+            let y = parseFloat(organism.style.top) + Math.random() * 8 - 4; // Adjust the range (8 - 4) for y movement
 
             // Keep organisms within the container
             if (x < 0) x = 0;
@@ -137,3 +142,4 @@
 </script>
 </body>
 </html>
+
