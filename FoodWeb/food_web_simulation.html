@@ -8,32 +8,34 @@
     /* CSS styles for the interactive food web */
     #container {
         display: flex;
-        flex-wrap: wrap;
-        gap: 20px;
         justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background-color: #f0f0f0;
+    }
+
+    .circle-container {
         position: relative;
-        width: 100%;
+        width: 400px;
+        height: 400px;
+        border-radius: 50%;
+        background-color: #fff;
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
     }
 
     .tile {
-        width: 100px;
-        height: 100px;
+        width: 80px;
+        height: 80px;
         border: 2px solid #000;
+        border-radius: 50%;
         display: flex;
         justify-content: center;
         align-items: center;
-        position: relative;
+        margin: 20px;
         cursor: pointer;
-    }
-
-    .line {
-        position: absolute;
-        width: calc(100% + 40px); /* Adjust as needed */
-        height: calc(100% + 40px); /* Adjust as needed */
-        top: -20px;
-        left: -20px;
-        border: 2px solid transparent;
-        pointer-events: none;
     }
 
     .arrow {
@@ -50,29 +52,27 @@
 </head>
 <body>
 <div id="container">
-    <!-- Plants -->
-    <div class="tile plant" id="rhododendron">Rhododendron</div>
-    <div class="tile plant" id="mountain-laurel">Mountain Laurel</div>
+    <div class="circle-container">
+        <!-- Plants -->
+        <div class="tile plant" id="rhododendron">Rhododendron</div>
+        <div class="tile plant" id="mountain-laurel">Mountain Laurel</div>
 
-    <!-- Fungi -->
-    <div class="tile fungus" id="bradley-milk-cap">Bradley Milk Cap</div>
-    <div class="tile fungus" id="jelly-roll-fungus">Jelly Roll Fungus</div>
+        <!-- Fungi -->
+        <div class="tile fungus" id="bradley-milk-cap">Bradley Milk Cap</div>
+        <div class="tile fungus" id="jelly-roll-fungus">Jelly Roll Fungus</div>
 
-    <!-- Herbivores -->
-    <div class="tile herbivore" id="fox-squirrel">Fox Squirrel</div>
-    <div class="tile herbivore" id="red-breasted-nuthatch">Red Breasted Nuthatches</div>
-    <div class="tile herbivore" id="yellow-bellied-sapsucker">Yellow Bellied Sapsucker</div>
-    <div class="tile herbivore" id="old-world-porcupine">Old World Porcupine</div>
-    <div class="tile herbivore" id="white-tailed-deer">White Tailed Deer</div>
-    <div class="tile herbivore" id="moose">Moose</div>
+        <!-- Herbivores -->
+        <div class="tile herbivore" id="fox-squirrel">Fox Squirrel</div>
+        <div class="tile herbivore" id="red-breasted-nuthatch">Red Breasted Nuthatches</div>
+        <div class="tile herbivore" id="yellow-bellied-sapsucker">Yellow Bellied Sapsucker</div>
+        <div class="tile herbivore" id="old-world-porcupine">Old World Porcupine</div>
+        <div class="tile herbivore" id="white-tailed-deer">White Tailed Deer</div>
+        <div class="tile herbivore" id="moose">Moose</div>
 
-    <!-- Carnivores -->
-    <div class="tile carnivore" id="opossum">Opossum</div>
-    <div class="tile carnivore" id="black-bear">Black Bear</div>
-
-    <!-- Lines -->
-    <div class="line"></div>
-    <div class="arrow" id="arrow1"></div>
+        <!-- Carnivores -->
+        <div class="tile carnivore" id="opossum">Opossum</div>
+        <div class="tile carnivore" id="black-bear">Black Bear</div>
+    </div>
 </div>
 
 <script>
@@ -83,7 +83,7 @@
         const arrow = document.createElement('div');
         arrow.className = 'arrow';
 
-        const container = document.getElementById('container');
+        const container = document.querySelector('.circle-container');
         container.appendChild(arrow);
 
         const fromRect = fromTile.getBoundingClientRect();
@@ -100,29 +100,31 @@
         arrow.style.width = `${Math.sqrt(deltaX ** 2 + deltaY ** 2)}px`;
     }
 
-    // Create lines and arrows on page load
-    const lines = document.querySelectorAll('.line');
-    const arrows = document.querySelectorAll('.arrow');
+    // Create arrows on page load
     const plants = document.querySelectorAll('.plant');
     const herbivores = document.querySelectorAll('.herbivore');
     const carnivores = document.querySelectorAll('.carnivore');
     const fungi = document.querySelectorAll('.fungus');
 
-    lines.forEach((line, index) => {
-        const angle = (index * (360 / lines.length)) % 360;
-        line.style.transform = `rotate(${angle}deg)`;
+    plants.forEach((plant, index) => {
+        const endTile = herbivores[index % herbivores.length];
+        createArrow(plant, endTile);
+    });
+
+    herbivores.forEach((herbivore, index) => {
+        const endTile = carnivores[index % carnivores.length];
+        createArrow(herbivore, endTile);
 
         const startTile = plants[index % plants.length];
-        const endTile = herbivores[index % herbivores.length];
-        createArrow(startTile, endTile);
+        createArrow(startTile, herbivore);
 
-        if (index % 2 === 0) {
-            const midTile = carnivores[index % carnivores.length];
-            createArrow(endTile, midTile);
-            createArrow(midTile, fungi[index % fungi.length]);
-        } else {
-            createArrow(endTile, fungi[index % fungi.length]);
-        }
+        const fungusTile = fungi[index % fungi.length];
+        createArrow(herbivore, fungusTile);
+    });
+
+    carnivores.forEach((carnivore, index) => {
+        const fungusTile = fungi[index % fungi.length];
+        createArrow(carnivore, fungusTile);
     });
 </script>
 </body>
