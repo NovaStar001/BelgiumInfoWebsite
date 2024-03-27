@@ -13,20 +13,19 @@ header {
 h1 {
   font-size: 36px;
   margin: 0;
-  color: transparent;
-  background-image: linear-gradient(to right, #ffffcc, #ffd700); /* Light yellow to deep yellow gradient */
-  background-size: 200% auto;
-  -webkit-background-clip: text;
-  background-clip: text;
-  animation: animateGold 4s linear infinite;
+  color: #ffffcc; /* Light yellow color */
+  animation: changeColor 4s linear infinite alternate;
 }
 
-@keyframes animateGold {
+@keyframes changeColor {
   0% {
-    background-position: 0 0;
+    color: #ffffcc; /* Light yellow color */
+  }
+  66% {
+    color: #ffd700; /* Deeper yellow color */
   }
   100% {
-    background-position: 200% 0;
+    color: #ffffcc;
   }
 }
 
