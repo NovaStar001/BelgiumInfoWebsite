@@ -12,6 +12,7 @@
         gap: 20px;
         justify-content: center;
         position: relative;
+        width: 100%;
     }
 
     .tile {
@@ -23,6 +24,16 @@
         align-items: center;
         position: relative;
         cursor: pointer;
+    }
+
+    .line {
+        position: absolute;
+        width: calc(100% + 40px); /* Adjust as needed */
+        height: calc(100% + 40px); /* Adjust as needed */
+        top: -20px;
+        left: -20px;
+        border: 2px solid transparent;
+        pointer-events: none;
     }
 
     .arrow {
@@ -58,6 +69,10 @@
     <!-- Carnivores -->
     <div class="tile carnivore" id="opossum">Opossum</div>
     <div class="tile carnivore" id="black-bear">Black Bear</div>
+
+    <!-- Lines -->
+    <div class="line"></div>
+    <div class="arrow" id="arrow1"></div>
 </div>
 
 <script>
@@ -85,48 +100,29 @@
         arrow.style.width = `${Math.sqrt(deltaX ** 2 + deltaY ** 2)}px`;
     }
 
-    // Create arrows on page load
+    // Create lines and arrows on page load
+    const lines = document.querySelectorAll('.line');
+    const arrows = document.querySelectorAll('.arrow');
     const plants = document.querySelectorAll('.plant');
     const herbivores = document.querySelectorAll('.herbivore');
     const carnivores = document.querySelectorAll('.carnivore');
     const fungi = document.querySelectorAll('.fungus');
 
-    plants.forEach(plant => {
-        herbivores.forEach(herbivore => {
-            createArrow(plant, herbivore);
-        });
-    });
+    lines.forEach((line, index) => {
+        const angle = (index * (360 / lines.length)) % 360;
+        line.style.transform = `rotate(${angle}deg)`;
 
-    herbivores.forEach(herbivore => {
-        carnivores.forEach(carnivore => {
-            createArrow(herbivore, carnivore);
-        });
-        fungi.forEach(fungus => {
-            createArrow(herbivore, fungus);
-        });
-    });
+        const startTile = plants[index % plants.length];
+        const endTile = herbivores[index % herbivores.length];
+        createArrow(startTile, endTile);
 
-    carnivores.forEach(carnivore => {
-        fungi.forEach(fungus => {
-            createArrow(carnivore, fungus);
-        });
-    });
-
-    // Add click event listener to each tile
-    const tiles = document.querySelectorAll('.tile');
-    tiles.forEach(tile => {
-        tile.addEventListener('click', () => {
-            // Remove the clicked tile
-            tile.remove();
-
-            // Remove arrow connections related to the clicked tile
-            const arrows = document.querySelectorAll('.arrow');
-            arrows.forEach(arrow => {
-                if (arrow.parentNode === document.getElementById('container')) {
-                    arrow.remove();
-                }
-            });
-        });
+        if (index % 2 === 0) {
+            const midTile = carnivores[index % carnivores.length];
+            createArrow(endTile, midTile);
+            createArrow(midTile, fungi[index % fungi.length]);
+        } else {
+            createArrow(endTile, fungi[index % fungi.length]);
+        }
     });
 </script>
 </body>
