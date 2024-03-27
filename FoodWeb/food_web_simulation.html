@@ -126,8 +126,8 @@
                 return; // Skip movement for plants and fungus
             }
 
-            let x = parseFloat(organism.style.left) + Math.random() * 16 - 4; // Adjust the range (8 - 4) for x movement
-            let y = parseFloat(organism.style.top) + Math.random() * 16 - 4; // Adjust the range (8 - 4) for y movement
+            let x = parseFloat(organism.style.left) + Math.random() * 16 - 8; // Adjust the range (8 - 4) for x movement
+            let y = parseFloat(organism.style.top) + Math.random() * 16 - 8; // Adjust the range (8 - 4) for y movement
 
             // Keep organisms within the container
             if (x < 0) x = 0;
