@@ -15,6 +15,19 @@ const speciesData = [
 
 const svg = document.getElementById('connections-svg');
 
+// Function to remove a species tile and its connections
+function removeSpecies(tile) {
+    const speciesToRemove = tile.id.toLowerCase();
+
+    // Remove the species tile
+    tile.remove();
+
+    // Remove the connections associated with the removed species
+    removeConnections(speciesToRemove);
+
+    alert('Species removed successfully.');
+}
+
 function addSpeciesTiles() {
     const container = document.querySelector('.food-web-container');
     speciesData.forEach(species => {
@@ -24,12 +37,9 @@ function addSpeciesTiles() {
         tile.textContent = species.id;
         tile.style.left = `${species.x}px`;
         tile.style.top = `${species.y}px`;
-        
+
         // Add click event listener to remove the species
-        tile.addEventListener('click', () => {
-            tile.remove();
-            removeConnections(tile.id.toLowerCase());
-        });
+        tile.addEventListener('click', () => removeSpecies(tile));
 
         container.appendChild(tile);
     });
