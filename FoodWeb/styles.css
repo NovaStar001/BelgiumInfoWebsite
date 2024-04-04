@@ -3,6 +3,7 @@ body {
 }
 
 .food-web-container {
+    position: relative;
     display: flex;
     flex-wrap: wrap;
     justify-content: center;
@@ -15,9 +16,25 @@ body {
     border: 1px solid green;
     border-radius: 5px;
     cursor: pointer;
+    position: relative;
+    z-index: 1;
 }
 
 .species:hover {
     background-color: darkgreen;
     color: white;
+}
+
+.connection {
+    position: absolute;
+    z-index: 0;
+    pointer-events: none;
+}
+
+.connection-line {
+    position: absolute;
+    border-bottom: 2px solid green;
+    width: 0;
+    z-index: 0;
+    pointer-events: none;
 }
