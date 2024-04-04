@@ -1,14 +1,13 @@
 const species = document.querySelectorAll('.species');
 
 function removeSpecies() {
-    const speciesToRemove = prompt('Enter the species number to remove (1-5):');
-    if (!speciesToRemove || isNaN(speciesToRemove) || speciesToRemove < 1 || speciesToRemove > 5) {
-        alert('Please enter a valid species number (1-5).');
+    const speciesToRemove = prompt('Enter the species name to remove:');
+    if (!speciesToRemove) {
+        alert('Please enter a species name.');
         return;
     }
 
-    const speciesIndex = parseInt(speciesToRemove) - 1;
-    const removedSpecies = species[speciesIndex];
+    const removedSpecies = document.getElementById(speciesToRemove.toLowerCase());
     if (!removedSpecies) {
         alert('Species not found.');
         return;
