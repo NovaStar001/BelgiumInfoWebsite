@@ -1,9 +1,8 @@
 const speciesData = [
-    { id: 'plants', class: 'plants', x: 250, y: 100 },
-    { id: 'herbivores', class: 'herbivores', x: 400, y: 250 },
-    { id: 'carnivores', class: 'carnivores', x: 300, y: 400 },
-    { id: 'fungus', class: 'fungus', x: 100, y: 300 },
-    // Add more species data as needed
+    { id: 'Mountain Laurel', class: 'plants', x: 250, y: 100 },
+    { id: 'Moose', class: 'herbivores', x: 400, y: 250 },
+    { id: 'Black Bear', class: 'carnivores', x: 300, y: 400 },
+    { id: 'Jelly Roll Fungus', class: 'fungus', x: 100, y: 300 },
 ];
 
 const svg = document.getElementById('connections-svg');
