@@ -16,8 +16,12 @@ const speciesData = [
 const svg = document.getElementById('connections-svg');
 
 // Function to remove a species tile and its connections
-function removeSpecies(tile) {
-    const speciesToRemove = tile.id.toLowerCase();
+function removeSpecies(speciesToRemove) {
+    const tile = document.getElementById(speciesToRemove);
+    if (!tile) {
+        alert('Species not found.');
+        return;
+    }
 
     // Remove the species tile
     tile.remove();
@@ -39,7 +43,7 @@ function addSpeciesTiles() {
         tile.style.top = `${species.y}px`;
 
         // Add click event listener to remove the species
-        tile.addEventListener('click', () => removeSpecies(tile));
+        tile.addEventListener('click', () => removeSpecies(species.id));
 
         container.appendChild(tile);
     });
