@@ -1,8 +1,16 @@
 const speciesData = [
     { id: 'Mountain Laurel', class: 'plants', x: 250, y: 100 },
+    { id: 'Rhododendron', class: 'plants', x: 250, y: 100 },
     { id: 'Moose', class: 'herbivores', x: 400, y: 250 },
+    { id: 'Old World Porcupine', class: 'herbivores', x: 400, y: 250 },
+    { id: 'Fox Squirrel', class: 'herbivores', x: 400, y: 250 },
+    { id: 'Yellow Bellied Sapsucker', class: 'herbivores', x: 400, y: 250 },
+    { id: 'Red Breasted Nuthatches', class: 'herbivores', x: 400, y: 250 },
+    { id: 'White Tail Deer', class: 'herbivores', x: 400, y: 250 },
     { id: 'Black Bear', class: 'carnivores', x: 300, y: 400 },
+    { id: 'Opossum', class: 'carnivores', x: 300, y: 400 },   
     { id: 'Jelly Roll Fungus', class: 'fungus', x: 100, y: 300 },
+    { id: 'Bradley Milk Cap', class: 'fungus', x: 100, y: 300 },
 ];
 
 const svg = document.getElementById('connections-svg');
@@ -64,12 +72,14 @@ connectSpecies('Rhododendron', 'Opossum');
 connectSpecies('Rhododendron', 'Yellow Bellied Sapsucker');
 connectSpecies('Rhododendron', 'Old World Porcupine');
 connectSpecies('Rhododendron', 'Moose');
+connectSpecies('Rhododendron', 'White Tail Deer');
 connectSpecies('Mountain Laurel', 'Red Breasted Nuthatches');
 connectSpecies('Mountain Laurel', 'Fox Squirrel');
 connectSpecies('Mountain Laurel', 'Opossum');
 connectSpecies('Mountain Laurel', 'Yellow Bellied Sapsucker');
 connectSpecies('Mountain Laurel', 'Old World Porcupine');
 connectSpecies('Mountain Laurel', 'Moose');
+connectSpecies('Mountain Laurel', 'White Tail Deer');
 connectSpecies('Black Bear', 'Bradley Milk Cap');
 connectSpecies('Black Bear', 'Jelly Roll Fungus');
 connectSpecies('Moose', 'Bradley Milk Cap');
