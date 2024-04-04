@@ -1,16 +1,16 @@
 const speciesData = [
     { id: 'Mountain Laurel', class: 'plants', x: 100, y: 100 },
     { id: 'Rhododendron', class: 'plants', x: 200, y: 100 },
-    { id: 'Moose', class: 'herbivores', x: 300, y: 250 },
-    { id: 'Old World Porcupine', class: 'herbivores', x: 400, y: 250 },
-    { id: 'Fox Squirrel', class: 'herbivores', x: 500, y: 250 },
-    { id: 'Yellow Bellied Sapsucker', class: 'herbivores', x: 100, y: 500 },
-    { id: 'Red Breasted Nuthatches', class: 'herbivores', x: 200, y: 500 },
-    { id: 'White Tail Deer', class: 'herbivores', x: 300, y: 500 },
-    { id: 'Black Bear', class: 'carnivores', x: 400, y: 500 },
-    { id: 'Opossum', class: 'carnivores', x: 500, y: 500 },   
-    { id: 'Jelly Roll Fungus', class: 'fungus', x: 100, y: 750 },
-    { id: 'Bradley Milk Cap', class: 'fungus', x: 200, y: 750 },
+    { id: 'Moose', class: 'herbivores', x: 300, y: 100 },
+    { id: 'Old World Porcupine', class: 'herbivores', x: 400, y: 100 },
+    { id: 'Fox Squirrel', class: 'herbivores', x: 500, y: 100 },
+    { id: 'Yellow Bellied Sapsucker', class: 'herbivores', x: 100, y: 200 },
+    { id: 'Red Breasted Nuthatches', class: 'herbivores', x: 200, y: 200 },
+    { id: 'White Tail Deer', class: 'herbivores', x: 300, y: 200 },
+    { id: 'Black Bear', class: 'carnivores', x: 400, y: 200 },
+    { id: 'Opossum', class: 'carnivores', x: 500, y: 200 },   
+    { id: 'Jelly Roll Fungus', class: 'fungus', x: 100, y: 300 },
+    { id: 'Bradley Milk Cap', class: 'fungus', x: 200, y: 300 },
 ];
 
 const svg = document.getElementById('connections-svg');
