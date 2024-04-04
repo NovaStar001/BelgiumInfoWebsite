@@ -1,16 +1,16 @@
 const speciesData = [
-    { id: 'Mountain Laurel', class: 'plants', x: 100, y: 100 },
-    { id: 'Rhododendron', class: 'plants', x: 200, y: 100 },
-    { id: 'Moose', class: 'herbivores', x: 300, y: 100 },
-    { id: 'Old World Porcupine', class: 'herbivores', x: 400, y: 100 },
-    { id: 'Fox Squirrel', class: 'herbivores', x: 500, y: 100 },
-    { id: 'Yellow Bellied Sapsucker', class: 'herbivores', x: 100, y: 200 },
-    { id: 'Red Breasted Nuthatches', class: 'herbivores', x: 200, y: 200 },
-    { id: 'White Tail Deer', class: 'herbivores', x: 300, y: 200 },
-    { id: 'Black Bear', class: 'carnivores', x: 400, y: 200 },
-    { id: 'Opossum', class: 'carnivores', x: 500, y: 200 },   
-    { id: 'Jelly Roll Fungus', class: 'fungus', x: 100, y: 300 },
-    { id: 'Bradley Milk Cap', class: 'fungus', x: 200, y: 300 },
+    { id: 'Mountain Laurel', class: 'plants', x: 0, y: 100 },
+    { id: 'Rhododendron', class: 'plants', x: 110, y: 100 },
+    { id: 'Moose', class: 'herbivores', x: 220, y: 100 },
+    { id: 'Old World Porcupine', class: 'herbivores', x: 330, y: 100 },
+    { id: 'Fox Squirrel', class: 'herbivores', x: 440, y: 100 },
+    { id: 'Yellow Bellied Sapsucker', class: 'herbivores', x: 550, y: 100 },
+    { id: 'Red Breasted Nuthatches', class: 'herbivores', x: 0, y: 200 },
+    { id: 'White Tail Deer', class: 'herbivores', x: 110, y: 200 },
+    { id: 'Black Bear', class: 'carnivores', x: 220, y: 200 },
+    { id: 'Opossum', class: 'carnivores', x: 330, y: 200 },   
+    { id: 'Jelly Roll Fungus', class: 'fungus', x: 440, y: 200 },
+    { id: 'Bradley Milk Cap', class: 'fungus', x: 550, y: 200 },
 ];
 
 const svg = document.getElementById('connections-svg');
