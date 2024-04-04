@@ -1,29 +1,28 @@
-const species = document.querySelectorAll('.species');
+const speciesData = [
+    { id: 'plants', class: 'plants', x: 250, y: 100 },
+    { id: 'herbivores', class: 'herbivores', x: 400, y: 250 },
+    { id: 'carnivores', class: 'carnivores', x: 300, y: 400 },
+    { id: 'fungus', class: 'fungus', x: 100, y: 300 },
+    // Add more species data as needed
+];
+
 const svg = document.getElementById('connections-svg');
 
-function removeSpecies() {
-    const speciesToRemove = prompt('Enter the species name to remove:');
-    if (!speciesToRemove) {
-        alert('Please enter a species name.');
-        return;
-    }
-
-    const removedSpecies = document.getElementById(speciesToRemove.toLowerCase());
-    if (!removedSpecies) {
-        alert('Species not found.');
-        return;
-    }
-
-    removedSpecies.remove();
-    removeConnections(speciesToRemove.toLowerCase());
-    alert('Species removed successfully.');
+// Function to add species tiles to the container
+function addSpeciesTiles() {
+    const container = document.querySelector('.food-web-container');
+    speciesData.forEach(species => {
+        const tile = document.createElement('div');
+        tile.id = species.id;
+        tile.className = `species ${species.class}`;
+        tile.textContent = species.id;
+        tile.style.left = `${species.x}px`;
+        tile.style.top = `${species.y}px`;
+        container.appendChild(tile);
+    });
 }
 
-function removeConnections(speciesToRemove) {
-    const connections = svg.querySelectorAll(`[data-from="${speciesToRemove}"], [data-to="${speciesToRemove}"]`);
-    connections.forEach(conn => conn.remove());
-}
-
+// Function to connect species with lines
 function connectSpecies(from, to) {
     const fromElem = document.getElementById(from);
     const toElem = document.getElementById(to);
@@ -50,8 +49,35 @@ function connectSpecies(from, to) {
     svg.appendChild(line);
 }
 
+// Initialize the food web
+addSpeciesTiles();
+
 // Example connections (you can customize these):
 connectSpecies('plants', 'herbivores');
 connectSpecies('herbivores', 'carnivores');
 connectSpecies('carnivores', 'fungus');
 connectSpecies('plants', 'fungus');
+
+// Function to remove species and associated connections
+function removeSpecies() {
+    const speciesToRemove = prompt('Enter the species name to remove:');
+    if (!speciesToRemove) {
+        alert('Please enter a species name.');
+        return;
+    }
+
+    const removedSpecies = document.getElementById(speciesToRemove.toLowerCase());
+    if (!removedSpecies) {
+        alert('Species not found.');
+        return;
+    }
+
+    removedSpecies.remove();
+    removeConnections(speciesToRemove.toLowerCase());
+    alert('Species removed successfully.');
+}
+
+function removeConnections(speciesToRemove) {
+    const connections = svg.querySelectorAll(`[data-from="${speciesToRemove}"], [data-to="${speciesToRemove}"]`);
+    connections.forEach(conn => conn.remove());
+}
