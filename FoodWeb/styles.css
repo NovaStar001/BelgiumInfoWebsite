@@ -1,0 +1,23 @@
+body {
+    font-family: Arial, sans-serif;
+}
+
+.food-web-container {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 20px;
+}
+
+.species {
+    padding: 10px;
+    background-color: lightgreen;
+    border: 1px solid green;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.species:hover {
+    background-color: darkgreen;
+    color: white;
+}
