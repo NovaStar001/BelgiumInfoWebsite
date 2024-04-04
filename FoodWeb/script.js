@@ -64,13 +64,17 @@ connectSpecies('Rhododendron', 'Fox Squirrel');
 connectSpecies('Rhododendron', 'Opossum');
 connectSpecies('Rhododendron', 'Yellow Bellied Sapsucker');
 connectSpecies('Rhododendron', 'Old World Porcupine');
+connectSpecies('Rhododendron', 'Moose');
 connectSpecies('Mountain Laurel', 'Red Breasted Nuthatches');
 connectSpecies('Mountain Laurel', 'Fox Squirrel');
 connectSpecies('Mountain Laurel', 'Opossum');
 connectSpecies('Mountain Laurel', 'Yellow Bellied Sapsucker');
 connectSpecies('Mountain Laurel', 'Old World Porcupine');
+connectSpecies('Mountain Laurel', 'Moose');
 connectSpecies('Black Bear', 'Bradley Milk Cap');
 connectSpecies('Black Bear', 'Jelly Roll Fungus');
+connectSpecies('Moose', 'Bradley Milk Cap');
+connectSpecies('Moose', 'Jelly Roll Fungus');
 connectSpecies('Old World Porcupine', 'Bradley Milk Cap');
 connectSpecies('Old World Porcupine', 'Jelly Roll Fungus');
 
