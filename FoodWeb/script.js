@@ -16,3 +16,4 @@ function removeSpecies() {
     removedSpecies.remove();
     alert('Species removed successfully.');
 }
+
