@@ -15,7 +15,6 @@ const speciesData = [
 
 const svg = document.getElementById('connections-svg');
 
-// Function to add species tiles to the container
 function addSpeciesTiles() {
     const container = document.querySelector('.food-web-container');
     speciesData.forEach(species => {
@@ -25,6 +24,13 @@ function addSpeciesTiles() {
         tile.textContent = species.id;
         tile.style.left = `${species.x}px`;
         tile.style.top = `${species.y}px`;
+        
+        // Add click event listener to remove the species
+        tile.addEventListener('click', () => {
+            tile.remove();
+            removeConnections(tile.id.toLowerCase());
+        });
+
         container.appendChild(tile);
     });
 }
@@ -86,25 +92,6 @@ connectSpecies('Moose', 'Bradley Milk Cap');
 connectSpecies('Moose', 'Jelly Roll Fungus');
 connectSpecies('Old World Porcupine', 'Bradley Milk Cap');
 connectSpecies('Old World Porcupine', 'Jelly Roll Fungus');
-
-// Function to remove species and associated connections
-function removeSpecies() {
-    const speciesToRemove = prompt('Enter the species name to remove:');
-    if (!speciesToRemove) {
-        alert('Please enter a species name.');
-        return;
-    }
-
-    const removedSpecies = document.getElementById(speciesToRemove.toLowerCase());
-    if (!removedSpecies) {
-        alert('Species not found.');
-        return;
-    }
-
-    removedSpecies.remove();
-    removeConnections(speciesToRemove.toLowerCase());
-    alert('Species removed successfully.');
-}
 
 function removeConnections(speciesToRemove) {
     const connections = svg.querySelectorAll(`[data-from="${speciesToRemove}"], [data-to="${speciesToRemove}"]`);
