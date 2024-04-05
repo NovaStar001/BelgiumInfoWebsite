@@ -127,5 +127,3 @@ function removeConnections(speciesToRemove) {
         conn.remove();
     });
 }
-
-}
