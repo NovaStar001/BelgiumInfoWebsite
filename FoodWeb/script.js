@@ -120,10 +120,12 @@ function removeConnections(speciesToRemove) {
     const connections = svg.querySelectorAll(`[data-from="${speciesToRemove}"], [data-to="${speciesToRemove}"]`);
     connections.forEach(conn => {
         const arrowId = conn.getAttribute('data-arrow-id');
-        const arrow = document.getElementById(arrowId);
+        const arrow = svg.querySelector(`[data-arrow-id="${arrowId}"]`);
         if (arrow) {
             arrow.remove();
         }
         conn.remove();
     });
+}
+
 }
