@@ -58,7 +58,8 @@ function connectSpecies(from, to) {
     svg.appendChild(line);
 
     // Calculate angle of the line
-    const angleDeg = Math.atan2(endY - startY, endX - startX);
+    const angleRad = Math.atan2(endY - startY, endX - startX);
+    const angleDeg = angleRad * (180 / Math.PI);
 
     // Calculate mid-point coordinates
     const midX = (startX + endX) / 2;
