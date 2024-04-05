@@ -63,12 +63,12 @@ function connectSpecies(from, to) {
 
     // Create arrow icon with rotation
     const arrow = document.createElementNS('http://www.w3.org/2000/svg', 'image');
-    arrow.setAttribute('http://www.w3.org/2000/svg', 'polygon'); // Replace 'arrow.svg' with your arrow icon path
-    arrow.setAttribute('x', startX);
-    arrow.setAttribute('y', startY - 10); // Adjust position as needed
+    arrow.setAttribute('href', 'https://cdn.jsdelivr.net/gh/google/material-design-icons/navigation/svg/production/ic_arrow_forward_24px.svg'); // Using a preset arrow icon
+    arrow.setAttribute('x', endX - 10); // Adjust position as needed
+    arrow.setAttribute('y', endY - 10); // Adjust position as needed
     arrow.setAttribute('width', '20'); // Adjust size as needed
     arrow.setAttribute('height', '20'); // Adjust size as needed
-    arrow.setAttribute('transform', `rotate(${angleDeg} ${startX} ${startY})`); // Rotate the arrow
+    arrow.setAttribute('transform', `rotate(${angleDeg} ${endX} ${endY})`); // Rotate the arrow
 
     svg.appendChild(arrow);
 }
