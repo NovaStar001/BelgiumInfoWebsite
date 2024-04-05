@@ -10,7 +10,7 @@ const speciesData = [
     { id: 'Black Bear', class: 'carnivores', x: 300, y: 50 },
     { id: 'Opossum', class: 'carnivores', x: 500, y: 200 },   
     { id: 'Jelly Roll Fungus', class: 'fungus', x: 400, y: 400 },
-    { id: 'Bradley Milk Cap', class: 'fungus', x: 500, y: 300 },
+    { id: 'Bradley Milk Cap', class: 'fungus', x: 500, y: 300 }
 ];
 
 const svg = document.getElementById('connections-svg');
