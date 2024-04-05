@@ -57,19 +57,18 @@ function connectSpecies(from, to) {
 
     svg.appendChild(line);
 
-    // Calculate arrow position (center of the line)
-    const arrowX = (startX + endX) / 2;
-    const arrowY = (startY + endY) / 2;
-
     // Calculate angle of the line
     const angleRad = Math.atan2(endY - startY, endX - startX);
     const angleDeg = angleRad * (180 / Math.PI);
 
     // Create arrow icon with rotation
-    const arrow = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
-    arrow.setAttribute('points', '-5,-10 5,-10 0,0');
-    arrow.setAttribute('transform', `translate(${arrowX},${arrowY}) rotate(${angleDeg})`);
-    arrow.setAttribute('fill', 'green');
+    const arrow = document.createElementNS('http://www.w3.org/2000/svg', 'image');
+    arrow.setAttribute('href', 'arrow.svg'); // Replace 'arrow.svg' with your arrow icon path
+    arrow.setAttribute('x', startX);
+    arrow.setAttribute('y', startY - 10); // Adjust position as needed
+    arrow.setAttribute('width', '20'); // Adjust size as needed
+    arrow.setAttribute('height', '20'); // Adjust size as needed
+    arrow.setAttribute('transform', `rotate(${angleDeg} ${startX} ${startY})`); // Rotate the arrow
 
     svg.appendChild(arrow);
 }
@@ -104,6 +103,14 @@ connectSpecies('Moose', 'Bradley Milk Cap');
 connectSpecies('Moose', 'Jelly Roll Fungus');
 connectSpecies('Old World Porcupine', 'Bradley Milk Cap');
 connectSpecies('Old World Porcupine', 'Jelly Roll Fungus');
+
+function removeSpecies(speciesToRemove) {
+    const tile = document.getElementById(speciesToRemove);
+    if (!tile) return;
+
+    tile.remove();
+    removeConnections(speciesToRemove);
+}
 
 function removeConnections(speciesToRemove) {
     const connections = svg.querySelectorAll(`[data-from="${speciesToRemove}"], [data-to="${speciesToRemove}"]`);
