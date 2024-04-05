@@ -63,7 +63,7 @@ function connectSpecies(from, to) {
 
     // Create arrow icon with rotation
     const arrow = document.createElementNS('http://www.w3.org/2000/svg', 'image');
-    arrow.setAttribute('href', 'https://cdn.jsdelivr.net/gh/google/material-design-icons/navigation/svg/production/ic_arrow_forward_24px.svg'); // Using a preset arrow icon
+    arrow.setAttribute('href', 'https://upload.wikimedia.org/wikipedia/commons/1/12/Right_arrow.svg'); // Using a preset arrow icon
     arrow.setAttribute('x', endX - 10); // Adjust position as needed
     arrow.setAttribute('y', endY - 10); // Adjust position as needed
     arrow.setAttribute('width', '20'); // Adjust size as needed
