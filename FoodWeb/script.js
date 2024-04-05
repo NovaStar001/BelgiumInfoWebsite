@@ -118,5 +118,12 @@ function removeSpecies(speciesToRemove) {
 
 function removeConnections(speciesToRemove) {
     const connections = svg.querySelectorAll(`[data-from="${speciesToRemove}"], [data-to="${speciesToRemove}"]`);
-    connections.forEach(conn => conn.remove());
+    connections.forEach(conn => {
+        const arrowId = conn.getAttribute('data-arrow-id');
+        const arrow = document.getElementById(arrowId);
+        if (arrow) {
+            arrow.remove();
+        }
+        conn.remove();
+    });
 }
