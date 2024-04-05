@@ -15,23 +15,6 @@ const speciesData = [
 
 const svg = document.getElementById('connections-svg');
 
-// Function to remove a species tile and its connections
-function removeSpecies(speciesToRemove) {
-    const tile = document.getElementById(speciesToRemove);
-    if (!tile) {
-        alert('Species not found.');
-        return;
-    }
-
-    // Remove the species tile
-    tile.remove();
-
-    // Remove the connections associated with the removed species
-    removeConnections(speciesToRemove);
-
-    alert('Species removed successfully.');
-}
-
 function addSpeciesTiles() {
     const container = document.querySelector('.food-web-container');
     speciesData.forEach(species => {
@@ -49,7 +32,6 @@ function addSpeciesTiles() {
     });
 }
 
-// Function to connect species with lines
 function connectSpecies(from, to) {
     const fromElem = document.getElementById(from);
     const toElem = document.getElementById(to);
@@ -74,6 +56,17 @@ function connectSpecies(from, to) {
     line.setAttribute('data-to', to);
 
     svg.appendChild(line);
+
+    // Calculate arrow position (center of the line)
+    const arrowX = (startX + endX) / 2;
+    const arrowY = (startY + endY) / 2;
+
+    // Create arrow icon
+    const arrow = document.createElementNS('http://www.w3.org/2000/svg', 'polygon');
+    arrow.setAttribute('points', `${arrowX - 5},${arrowY - 10} ${arrowX + 5},${arrowY - 10} ${arrowX},${arrowY}`);
+    arrow.setAttribute('fill', 'green');
+
+    svg.appendChild(arrow);
 }
 
 // Initialize the food web
